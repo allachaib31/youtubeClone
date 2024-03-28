@@ -10,6 +10,7 @@ const cluster = require("cluster");
 const { default: rateLimit } = require("express-rate-limit");
 const numCPUs = require("os").cpus().length;
 const session = require("./middleware/session");
+const auth = require("./routes/auth/auth.routers");
 const app = express();
 
 const MONGODB = process.env.MONGODB;
@@ -44,7 +45,8 @@ app
   .use(limiter)
   .use(compression())
   .use(cookieParser())
-  .use(morgan("tiny"));
+  .use(morgan("tiny"))
+  .use("/",auth);
 
 app.get("/", (req, res) => {
   return res.status(200).send("hello world!!");

@@ -28,6 +28,7 @@ const channelSchema = new mongoose.Schema({
   idUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
+    unique: true,
   },
 });
 

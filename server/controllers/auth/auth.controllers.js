@@ -14,7 +14,7 @@ exports.signUp = async (req, res) => {
     await user.save();
     return res.status(200).send({
       status: "success",
-      message: "Congratulation! Youve successfully signed up welcome aboard!",
+      message: "Congratulation! You've successfully signed up welcome aboard!",
     });
   } catch (err) {
     return res.status(400).json({

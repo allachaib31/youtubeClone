@@ -11,6 +11,7 @@ const { default: rateLimit } = require("express-rate-limit");
 const numCPUs = require("os").cpus().length;
 const session = require("./middleware/session");
 const auth = require("./routes/auth/auth.routers");
+const channel = require("./routes/channel/channel.routers");
 const app = express();
 
 const MONGODB = process.env.MONGODB;
@@ -46,7 +47,8 @@ app
   .use(compression())
   .use(cookieParser())
   .use(morgan("tiny"))
-  .use("/",auth);
+  .use("/", auth)
+  .use("/", channel);
 
 app.get("/", (req, res) => {
   return res.status(200).send("hello world!!");
@@ -69,6 +71,6 @@ if (cluster.isMaster) {
     console.log("Forking a new worker...");
     cluster.fork();
   });
-}else{
-    startServer();
+} else {
+  startServer();
 }

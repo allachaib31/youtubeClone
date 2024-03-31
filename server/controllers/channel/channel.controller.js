@@ -1,14 +1,14 @@
 const channelModel = require("../../models/channel");
+const { storage } = require("../../db/firebaseConfig");
 const crypto = require("crypto");
 const {
-  getStorage,
   ref,
   uploadBytes,
   getDownloadURL,
   deleteObject,
 } = require("firebase/storage");
 
-const { initializeApp } = require("firebase/app");
+/*const { initializeApp } = require("firebase/app");
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -19,7 +19,7 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
+const storage = getStorage(app);*/
 exports.addChannel = async (req, res) => {
   const { name, description } = req.body;
   const storageRefProfileImage = ref(
@@ -116,10 +116,10 @@ exports.updateChannelProfileImage = async (req, res) => {
     const downloadUrlProfileImage = await getDownloadURL(
       storageRefProfileImage
     );
-    const fileRef = ref(storage, channel.profileImage);
-    await deleteObject(fileRef);
     channel.profileImage = downloadUrlProfileImage;
     await channel.save();
+    const fileRef = ref(storage, channel.profileImage);
+    await deleteObject(fileRef);
     return res.status(200).send({
       status: "success",
       message: "Congratulation! you've successfully update your profileImage"

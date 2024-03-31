@@ -1,4 +1,4 @@
-const HOSTREDIS = process.env.HOST;
+const HOSTREDIS = process.env.HOSTREDIS;
 const PORTREDIS = process.env.PORTREDIS;
 const USERNAMEREDIS =process.env.USERNAMEREDIS;
 const PASSWORDREDIS = process.env.PASSWORDREDIS;

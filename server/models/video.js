@@ -16,6 +16,10 @@ const videoSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  categories: {
+    type: Array,
+    required: true,
+  },
   vues: {
     type: Number,
     default: 0,

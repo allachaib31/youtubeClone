@@ -8,6 +8,7 @@ const {
   validateSession,
 } = require("../../controllers/auth/auth.controllers.js");
 
+// Post Methods
 router.post("/auth/login", login);
 router.post("/auth/signUp", signUp);
 router.post("/auth/logout", logout);

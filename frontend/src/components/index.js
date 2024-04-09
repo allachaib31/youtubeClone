@@ -1,2 +1,12 @@
 export { default as SignIn } from "./auth/signIn";
 export { default as SignUp } from "./auth/signUp";
+export { default as Header } from "./header/header";
+export { default as HomePage } from "./home/home";
+export { default as Circle } from "./circle/circle";
+export { default as Channel } from "./channel/channel";
+export { default as DisplayChannel } from "./channel/displayChannel";
+export { default as AddChannel } from "./channel/addChannel";
+export { default as UploadVideo } from "./channel/uploadVideo";
+export { default as VideoChannel } from "./channel/videoChannel";
+export { default as WatchVideo } from "./videos/watchVideo";
+export { default as History } from "./history/history";

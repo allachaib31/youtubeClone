@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 const dislikeSchema = new mongoose.Schema({
-  videoId: {
+  idVideo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "videos",
   },
-  userId: {
+  idUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
   date: {
     type: Date,
-    default: Date().now()
+    default: Date.now()
   }
 });
 

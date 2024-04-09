@@ -126,7 +126,7 @@ function SignUp({ setSignIn }) {
           />
         </label>
         <label className="cursor-pointer" onClick={() => setSignIn((e) => !e)}>
-          Already have a count !
+          Already have account !
         </label>
         <button
           onClick={(e) => {

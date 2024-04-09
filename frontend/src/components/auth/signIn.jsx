@@ -10,7 +10,7 @@ function SignIn({ setSignIn }) {
   const [message, setMessage] = useState({
     status: "",
     text: ""
-  })
+  });
   const loginSubmit = () => {
     setSubmit((e) => !e);
     setMessage({
@@ -96,12 +96,12 @@ function SignIn({ setSignIn }) {
           />
         </label>
         <label>
-          forgoten password ?{" "}
           <span className="cursor-pointer" onClick={() => setSignIn((e) => !e)}>
-            i don't have a count !
+            i don't have account !
           </span>
         </label>
         <button
+          disabled={submit}
           onClick={(e) => {
             e.preventDefault();
             loginSubmit();

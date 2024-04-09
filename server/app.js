@@ -37,14 +37,21 @@ if (cluster.isMaster) {
   });
 } else {
   console.log(`Worker ${process.pid} started`);
-  const io = require("socket.io")(server);
+  const io = require("socket.io")(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      credentials: true
+    }
+  });
   io.adapter(createAdapter());
   setupWorker(io);
   exports.socketController = new SocketController(io);
   const auth = require("./routes/auth/auth.router");
-  const channel = require("./routes/channel/channel.routers");
+  const channel = require("./routes/channel/channel.router");
   const video = require("./routes/video/video.router");
-
+  const comment = require("./routes/comment/comment.router");
+  const likeDislike = require("./routes/like&dislike/like&dislike.router");
+  const history = require("./routes/history/history.router");
   const MONGODB = process.env.MONGODB;
   mongoose
     .connect(MONGODB)
@@ -71,6 +78,7 @@ if (cluster.isMaster) {
     .use(
       cors({
         origin: "http://localhost:3000",
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "*"],
         credentials: true,
       })
     )
@@ -80,7 +88,10 @@ if (cluster.isMaster) {
     .use(morgan("tiny"))
     .use("/", auth)
     .use("/", channel)
-    .use("/", video);
+    .use("/", video)
+    .use("/", comment)
+    .use("/",likeDislike)
+    .use("/", history);
     
   const PORT = process.env.PORT || 3000;
   server.listen(PORT, () => {

@@ -6,7 +6,8 @@ const {
   saveVideo,
   updateVideo,
   deletedVideo,
-  getVideo
+  getVideo,
+  getVideos
 } = require("../../controllers/video/video.controllers.js");
 
 const router = express.Router();
@@ -19,19 +20,19 @@ router.use(authMiddleware);
 // Post Methods
 router.post(
   "/video/uploadVideo",
-  authMiddleware,
   upload.single("video"),
   uploadVideo
 );
-router.post("/video/saveVideo", authMiddleware, saveVideo);
+router.post("/video/saveVideo", upload.single("thumbnail"),saveVideo);
 
 // Update Methods
-router.put("/video/updateVideo", authMiddleware, updateVideo)
+router.put("/video/updateVideo", updateVideo)
 
 // Delete Methods
-router.delete("/video/deleteVideo", authMiddleware,deletedVideo);
+router.delete("/video/deleteVideo",deletedVideo);
 
 // Get Methods
-router.get("/video/getVideo", authMiddleware, getVideo);
+router.get("/video/getVideo", getVideo);
+router.get("/video/getVideos", getVideos);
 
 module.exports = router;

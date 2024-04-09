@@ -11,6 +11,14 @@ const channelSchema = new mongoose.Schema({
     maxLength: 5000,
     required: true,
   },
+  numberOfVideos: {
+    type: Number,
+    default: 0,
+  },
+  numberOfSubscribes: {
+    type: Number,
+    default: 0,
+  },
   coverImage: {
     type: String,
     maxLength: 2024,

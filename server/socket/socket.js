@@ -17,7 +17,7 @@ class SocketController extends EventEmitter {
       console.log("A user connected");
       // Handle 'chat message' event
       socket.on("joinRoom",()=>{
-        console.log(socket.request.session.user.id)
+        console.log("hello" + socket.request.session.user.id)
         socket.join(socket.request.session.user.id);
       })
       socket.on("chat message", (msg) => {

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../../models/user");
+const channelModel = require("../../models/channel");
 const SALTKEY = Number(process.env.SALTKEY);
 
 exports.signUp = async (req, res) => {
@@ -45,7 +46,7 @@ exports.login = async (req, res) => {
     req.session.user = {
       id: user._id,
       email: user.email,
-      username: user.password,
+      username: user.username,
     };
     return res.status(201).send({
       status: "success",
@@ -79,8 +80,33 @@ exports.logout = async (req, res) => {
   }
 };
 exports.validateSession = async (req, res) => {
-  return res.status(201).send({
-    status: "success",
-    msg: "Login successful!",
-  });
+  const idUser = req.user.id;
+  try {
+    const channel = await channelModel.findOne({
+      idUser: idUser
+    }).populate({
+      path: "idUser",
+      select: {
+        username: 1
+      }
+    });
+    console.log(channel)
+    return res.status(201).send({
+      status: "success",
+      msg: "Login successful!",
+      info: {
+        user: {
+          idUser: idUser,
+          username: req.user.username
+        },
+        channel: !channel ? false : channel
+      }
+    });
+  } catch (error) {
+    console.log(error)
+    return res.status(400).send({
+      status: "error",
+      msg: "try again!!"
+    });
+  }
 };

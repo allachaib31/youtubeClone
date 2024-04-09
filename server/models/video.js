@@ -20,6 +20,10 @@ const videoSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  thumbnail: {
+    type: String,
+    required: true,
+  },
   vues: {
     type: Number,
     default: 0,

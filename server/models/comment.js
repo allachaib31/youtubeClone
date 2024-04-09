@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
-  videoId: {
+  idVideo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "videos",
   },
-  userId: {
+  idChannel: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: "channels",
   },
   comment: {
     type: String,
@@ -16,7 +16,7 @@ const commentSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date().now(),
+    default: Date.now(),
   },
 });
 

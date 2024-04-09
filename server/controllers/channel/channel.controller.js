@@ -1,4 +1,6 @@
 const channelModel = require("../../models/channel");
+const videoModel = require("../../models/video");
+const commentModel = require("../../models/comment");
 const { storage } = require("../../db/firebaseConfig");
 const crypto = require("crypto");
 const {
@@ -42,6 +44,7 @@ exports.addChannel = async (req, res) => {
     return res.status(200).send({
       status: "success",
       msg: "Congratulations! You've successfully create channel ",
+      channel
     });
   } catch (err) {
     console.log(err);
@@ -183,18 +186,56 @@ exports.deleteChannel = async (req, res) => {
     }
     const profileImageRef = ref(storage,channel.profileImage);
     const coverImageRef = ref(storage,channel.coverImage);
+    const videos = await videoModel.find({
+      idChannel: idChannel
+    });
+    console.log(videos)
     await channel.deleteOne();
+    await videoModel.deleteMany({idChannel: idChannel});
+    await commentModel.deleteMany({idChannel: idChannel});
     await deleteObject(profileImageRef);
     await deleteObject(coverImageRef);
+    for (let i = 0; i < videos.length; i++) {
+      var storageRefVide = ref(storage,videos[i].videoUrl)
+      await deleteObject(storageRefVide);
+    }
     return res.status(200).send({
       status: "success",
       message: "Congratulation! you've successfully deleted your channel"
     });
   }catch(err){
+    console.log(err)
     return res.status(400).send({
       status: "error",
       message: "try again!!"
     });
   }
 };
-exports.getChannel = async (req, res) => {};
+exports.getChannel = async (req, res) => {
+  const idUser = req.user.id;
+  try{
+    const channel = await channelModel.findOne({
+      idUser: idUser
+    });
+    if(!channel) {
+      return res.status(404).send({
+        status: "error",
+        msg: "this channel is not exist!!"
+      });
+    }
+    const videoChannel = await videoModel.find({
+      idChannel: channel._id
+    })
+    return res.status(200).send({
+      status: "success",
+      channel: channel,
+      videoChannel: videoChannel
+    });
+  }catch(err){
+    console.log(err)
+    return res.status(400).send({
+      status: "error",
+      msg: "try again!!"
+    });
+  }
+};

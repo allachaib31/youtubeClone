@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const likeSchema = new mongoose.Schema({
+const historySchema = new mongoose.Schema({
   idVideo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "videos",
@@ -15,6 +15,6 @@ const likeSchema = new mongoose.Schema({
   }
 });
 
-const likeModel = mongoose.model("likes", likeSchema);
+const historyModel = mongoose.model("history", historySchema);
 
-module.exports = likeModel;
+module.exports = historyModel;

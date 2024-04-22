@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserContext } from "../../screens";
 import { LOGOUT } from "../../utils/FetchFromApi";
 
-function Header() {
+function Header({setSearchText}) {
   const user = useContext(UserContext);
   const logout = () => {
     LOGOUT()
@@ -129,6 +129,9 @@ function Header() {
           <input
             type="text"
             placeholder="Search"
+            onChange={(e) => setSearchText((text) => {
+              return e.target.value
+            })}
             className="input input-bordered w-50 md:w-auto font-bold text-white"
           />
         </div>

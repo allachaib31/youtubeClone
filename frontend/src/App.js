@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Auth from "./screens/auth";
 import Home from "./screens";
-import { Channel, HomePage, DisplayChannel, AddChannel, VideoChannel, UploadVideo, WatchVideo, History } from "./components";
+import { Channel, HomePage, DisplayChannel, AddChannel, VideoChannel, UploadVideo, WatchVideo, History, SearchVideo } from "./components";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
             <Route path="/channel/createChannel" element={<AddChannel />}/>
           </Route>
           <Route path="/video/" element={<WatchVideo />} />
+          <Route path="/search/" element={<SearchVideo />} />
           <Route path="/history/" element={<History />}/>
         </Route>
         <Route path="/auth" element={<Auth /> }/>

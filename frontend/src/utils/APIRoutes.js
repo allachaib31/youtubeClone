@@ -25,3 +25,6 @@ export const ADDDISLIKE_ROUTE = `${HOST}dislike`;
 
 // History Route
 export const HISTORY_ROUTE = `${HOST}history`;
+
+// Search Route 
+export const SEARCH_ROUTE = `${HOST}search`

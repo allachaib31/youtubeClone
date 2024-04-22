@@ -10,3 +10,4 @@ export { default as UploadVideo } from "./channel/uploadVideo";
 export { default as VideoChannel } from "./channel/videoChannel";
 export { default as WatchVideo } from "./videos/watchVideo";
 export { default as History } from "./history/history";
+export { default as SearchVideo } from "./search/searchVideo";

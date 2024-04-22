@@ -40,8 +40,8 @@ if (cluster.isMaster) {
   const io = require("socket.io")(server, {
     cors: {
       origin: "http://localhost:3000",
-      credentials: true
-    }
+      credentials: true,
+    },
   });
   io.adapter(createAdapter());
   setupWorker(io);
@@ -52,6 +52,7 @@ if (cluster.isMaster) {
   const comment = require("./routes/comment/comment.router");
   const likeDislike = require("./routes/like&dislike/like&dislike.router");
   const history = require("./routes/history/history.router");
+  const search = require("./routes/search/search.router");
   const MONGODB = process.env.MONGODB;
   mongoose
     .connect(MONGODB)
@@ -78,7 +79,16 @@ if (cluster.isMaster) {
     .use(
       cors({
         origin: "http://localhost:3000",
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "*"],
+        methods: [
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE",
+          "PATCH",
+          "OPTIONS",
+          "HEAD",
+          "*",
+        ],
         credentials: true,
       })
     )
@@ -90,9 +100,10 @@ if (cluster.isMaster) {
     .use("/", channel)
     .use("/", video)
     .use("/", comment)
-    .use("/",likeDislike)
-    .use("/", history);
-    
+    .use("/", likeDislike)
+    .use("/", history)
+    .use("/", search);
+
   const PORT = process.env.PORT || 3000;
   server.listen(PORT, () => {
     console.log(
@@ -100,4 +111,3 @@ if (cluster.isMaster) {
     );
   });
 }
-

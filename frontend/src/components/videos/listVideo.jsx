@@ -2,6 +2,7 @@ import React from "react";
 import videoImage from "../../images/videoImage.png";
 import { Link } from "react-router-dom";
 function ListVideo({ listVideos }) {
+  console.log(listVideos)
   return (
     <div className="px-[1rem] backdrop-blur-sm bg-[#403F3F]/30 mt-[2rem] py-[2rem] rounded-md">
       <div className=" flex flex-wrap gap-[5rem] mt-3">

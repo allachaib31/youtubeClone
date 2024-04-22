@@ -14,7 +14,8 @@ import {
   SIGNUP_ROUTE,
   UPLOADVIDEO_ROUTE,
   VALIDATE_ROUTE,
-  HISTORY_ROUTE
+  HISTORY_ROUTE,
+  SEARCH_ROUTE
 } from "./APIRoutes";
 
 axios.defaults.withCredentials = true;
@@ -93,4 +94,11 @@ export const ADDDISLIKE = async (dislike) => {
 export const GETHISTORY = async() => {
     const { data } = await axios.get(HISTORY_ROUTE);
     return data;
+}
+
+// Search Function
+
+export const SEARCH = async(keyword) => {
+  const { data } = await axios.get(SEARCH_ROUTE + "?keywords=" + keyword);
+  return data; 
 }
